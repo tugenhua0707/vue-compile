@@ -9,15 +9,11 @@
   <body>
     <div id="app">
       <h3>vue-compile编译模板</h3>
-      <vue-compile width="200">
-        <template>
-          <div @click="clickFunc()">我是来测试vue-compile的使用，请点击我~</div>
-        </template>
+      <vue-compile width="200" :data="data" :opera="opera">
       </vue-compile>
     </div>
     <script id="vue-compile" type="text/x-template">
       <div class="container">
-        <div class="hidden-columns" ref="hiddenColumns"><slot></slot></div>
         <div class="cloneNode" ref="cloneNode"></div>
       </div>
     </script>
@@ -26,11 +22,24 @@
         el: '#app',
         data() {
           return {
-            
+            data: [
+              {
+                "name": 'kongzhi1',
+                "age": 29
+              },
+              {
+                "name": 'kongzhi1',
+                "age": 30
+              }
+            ],
+            opera: '<div @click="clickFunc($event)" :data-item="1">我是来测试vue-compile的使用，请点击我~</div>'
           }
         },
         methods: {
-          clickFunc() {
+          clickFunc(e) {
+            console.log(e.target);
+            var index = e.target.getAttribute('data-item');
+            console.log(this.data[index]);
             console.log(111);
           }
         }

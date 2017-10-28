@@ -2,7 +2,11 @@
 Vue.component('vue-compile', {
   template: '#vue-compile',
   props: {
-    
+    data: {
+      type: Array,
+      required: true
+    },
+    opera: String
   },
   data() {
     return {
@@ -13,7 +17,8 @@ Vue.component('vue-compile', {
 
   },
   beforeMount() {
-
+    console.log(this.data);
+    console.log(this.opera);
   },
   mounted() {
     this.$nextTick(() => {
@@ -24,9 +29,8 @@ Vue.component('vue-compile', {
     compile() {
       let methods = {};
       const $parent = this.$parent;
-      console.log(this)
-      var template = '<div @click="clickFunc()">我是来测试vue-compile的使用，请点击我~</div>';
-      // var template = this.$slots.default;
+      //var template = '<div @click="clickFunc()">我是来测试vue-compile的使用，请点击我~</div>';
+      var template = this.opera;
       const cell = document.createElement('div');
       cell.innerHTML = template;
       Object.keys($parent).forEach(key => {
